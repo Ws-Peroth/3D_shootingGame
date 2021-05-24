@@ -4,42 +4,59 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed;
-
+    public GameObject mainCamera;
+    public float moveSpeed;
     private void Start()
     {
-        speed = 5f;
+        moveSpeed = 10f;
+        gameObject.transform.rotation = Quaternion.identity;
+        mainCamera.transform.rotation = Quaternion.identity;
+        mainCamera.transform.Rotate(new Vector3(15, -90, 0));
     }
 
-    public void Walk()
+    public void Move()
     {
-        // if (Input.GetKey(KeyCode.LeftArrow)) { transform.Translate(-speed * Time.deltaTime, 0, 0); }
-        // if (Input.GetKey(KeyCode.RightArrow)) { transform.Translate(speed * Time.deltaTime, 0, 0); }
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            transform.Translate(0, 0, speed * Time.deltaTime);
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
-            transform.Translate(0, 0, -speed * Time.deltaTime);
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
         }
     }
 
-    public void Spin()
+    public void IsDash()
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            transform.Rotate(0, -0.5f, 0);
+            moveSpeed = 30f;
         }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        else
         {
-            transform.Rotate(0, 0.5f, 0);
+            moveSpeed = 10f;
         }
     }
 
     void Update()
     {
-        Walk();
-        Spin();
+        IsDash();
+        Move();
     }
 }
