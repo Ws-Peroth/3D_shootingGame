@@ -632,6 +632,7 @@ GameObject:
   - component: {fileID: 4431562304089850568}
   - component: {fileID: 734027343643184493}
   - component: {fileID: 3299800090689304999}
+  - component: {fileID: 3948463642134567027}
   m_Layer: 0
   m_Name: Patch_import
   m_TagString: Untagged
@@ -639,6 +640,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3948463642134567027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948463642134567026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468692b5421153f4db5dd8c7b2da911a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPatternOn: 0
 --- !u!4 &4431562304089850568
 Transform:
   m_ObjectHideFlags: 0
