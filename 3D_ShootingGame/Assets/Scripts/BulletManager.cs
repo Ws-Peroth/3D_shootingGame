@@ -16,27 +16,27 @@ public class BulletManager : MonoBehaviour
 
     void Start()
     {
+        if (bulletManager == null)
+        {
+            bulletManager = this;
+        }
+        
         isInstantiateEnd = false;
         enemyBulletPool = new Queue<GameObject>();
         playerBulletPool = new Queue<GameObject>();
 
-        if (bulletManager = null)
-        {
-            bulletManager = this;
-        }
-
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 6000; i++)
         {
             GameObject bullet = Instantiate(enemyBulletPrefeb);
-            bullet.SetActive(false);
             enemyBulletPool.Enqueue(bullet);
+            bullet.SetActive(false);
         }
 
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 100; i++)
         {
             GameObject bullet = Instantiate(PlayerBulletPrefeb);
-            bullet.SetActive(false);
             playerBulletPool.Enqueue(bullet);
+            bullet.SetActive(false);
         }
 
         isInstantiateEnd = true;
