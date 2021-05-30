@@ -83,37 +83,37 @@ public class Player : MonoBehaviour
     {
         if(level == 1)
         {
-            GameObject bullet1 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+            GameObject bullet1 = 
+                BulletManager.bulletManager.InstantiatePlayerBullet(
+                    transform.position + new Vector3(0, -1, 0),
+                    Quaternion.identity
+                );
             bullet1.GetComponent<PlayerBullet>().moveVector = Vector3.left;
         }
         if (level == 2)
         {
-            GameObject bullet1 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, -1), Quaternion.identity);
-            bullet1.GetComponent<PlayerBullet>().moveVector = Vector3.left;
-            
-            GameObject bullet2 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, 1), Quaternion.identity);
-            bullet2.GetComponent<PlayerBullet>().moveVector = Vector3.left;
-            
-            GameObject bullet3 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
-            bullet3.GetComponent<PlayerBullet>().moveVector = Vector3.left;
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject bullet =
+                    BulletManager.bulletManager.InstantiatePlayerBullet(
+                        transform.position + new Vector3(0, -1, i - 1),
+                        Quaternion.identity
+                    );
+                bullet.GetComponent<PlayerBullet>().moveVector = Vector3.left;
+            }
 
         }
         if (level == 3)
         {
-            GameObject bullet1 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, -1), Quaternion.identity);
-            bullet1.GetComponent<PlayerBullet>().moveVector = Vector3.left;
-
-            GameObject bullet2 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, 1), Quaternion.identity);
-            bullet2.GetComponent<PlayerBullet>().moveVector = Vector3.left;
-
-            GameObject bullet3 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
-            bullet3.GetComponent<PlayerBullet>().moveVector = Vector3.left;
-            
-            GameObject bullet4 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, -2), Quaternion.identity);
-            bullet4.GetComponent<PlayerBullet>().moveVector = Vector3.left;
-
-            GameObject bullet5 = Instantiate(playerBullet, transform.position + new Vector3(0, -1, 2), Quaternion.identity);
-            bullet5.GetComponent<PlayerBullet>().moveVector = Vector3.left;
+            for(int i = 0; i < 5; i++)
+            {
+                GameObject bullet =
+                BulletManager.bulletManager.InstantiatePlayerBullet(
+                    transform.position + new Vector3(0, -1, i - 2),
+                    Quaternion.identity
+                );
+                bullet.GetComponent<PlayerBullet>().moveVector = Vector3.left;
+            }
         }
     }
 

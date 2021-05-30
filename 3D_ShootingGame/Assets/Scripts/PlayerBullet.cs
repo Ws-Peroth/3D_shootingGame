@@ -9,9 +9,11 @@ public class PlayerBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 8) return;
-        if (other.gameObject.name == "Player") return;
+        if (other.gameObject.layer == 9) return;
+        if (other.gameObject.layer == 10) other.gameObject.GetComponent<Enemy>().Hit();
 
-        Destroy(gameObject);
+        BulletManager.bulletManager.DestroyPalyerBullet(gameObject);
+        // Destroy(gameObject);
     }
 
     private void Update()
