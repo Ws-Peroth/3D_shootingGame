@@ -24,15 +24,22 @@ public class Enemy : MonoBehaviour
     // x : -340 ~ 57
     // y : 25 ~ 182
     // z : -68 ~ 55;
+
+    public void Hit()
+    {
+        print("Enemy Hit!");
+    }
+
     private void Start()
     {
         patternCount = 0;
         isPatternOn = false;
         patterns = new List<pattern>
         {
-            Pattern01,
-            Pattern02,
-            Pattern03
+            // Pattern01,
+            // Pattern02,
+            // Pattern03,
+            Pattern04
         };
     }
 
@@ -56,17 +63,21 @@ public class Enemy : MonoBehaviour
         isPatternOn = true;
         print("call pattern 01");
         force = Vector3.right * Time.deltaTime * 1f;
-        StartCoroutine(nameof(Pattern01MakeBullet));
+        LoopPattern01();
     }
-
-    IEnumerator Pattern01MakeBullet()
+    public void LoopPattern01()
     {
         if (patternCount == 50)
         {
             isPatternOn = false;
-            yield break;
+            return;
         }
+        StartCoroutine(nameof(Pattern01MakeBullet));
+        Invoke(nameof(LoopPattern01), 1f);
+    }
 
+    IEnumerator Pattern01MakeBullet()
+    {
         for (float j = 0 + patternCount + Random.Range(-90.0f, 90.0f) * 3.6f; j < 360; j += 36)
         {
             for (float i = 0 + patternCount + Random.Range(-90.0f, 90.0f) * 3.6f; i < 360; i += 36)
@@ -78,9 +89,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(0.5f);
         patternCount++;
-        StartCoroutine(nameof(Pattern01MakeBullet));
         yield break;
     }
 
@@ -90,17 +99,22 @@ public class Enemy : MonoBehaviour
         isPatternOn = true;
         print("call pattern 02");
         force = Vector3.right * Time.deltaTime * 2f;
-        StartCoroutine(nameof(Pattern02MakeBullet));
+        LoopPattern02();
     }
 
-    IEnumerator Pattern02MakeBullet()
+    public void LoopPattern02()
     {
         if (patternCount == 50)
         {
             isPatternOn = false;
-            yield break;
+            return;
         }
+        StartCoroutine(nameof(Pattern02MakeBullet));
+        Invoke(nameof(LoopPattern02), 1f);
+    }
 
+    IEnumerator Pattern02MakeBullet()
+    {
         for (int i = 25; i <= 182; i+=10)
         {
             for(int j = -68; j <=55; j+=10)
@@ -112,9 +126,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(1f);
-        patternCount++;
-        StartCoroutine(nameof(Pattern02MakeBullet));
+        patternCount++;   
         yield break;
     }
 
@@ -124,17 +136,21 @@ public class Enemy : MonoBehaviour
         isPatternOn = true;
         print("call pattern 03");
         force = Vector3.right * Time.deltaTime * 0.5f;
-        StartCoroutine(nameof(Pattern03MakeBullet));
+        LoopPattern03();
     }
-
-    IEnumerator Pattern03MakeBullet()
+    public void LoopPattern03()
     {
         if (patternCount == 50)
         {
             isPatternOn = false;
-            yield break;
+            return;
         }
+        StartCoroutine(nameof(Pattern03MakeBullet));
+        Invoke(nameof(LoopPattern03), 0.5f);
+    }
 
+    IEnumerator Pattern03MakeBullet()
+    {
         float positionX = Random.Range(fieldSizeMinX, fieldSizeMaxX);
         float positionY = Random.Range(fieldSizeMinY, fieldSizeMaxY);
         float positionZ = Random.Range(fieldSizeMinZ, fieldSizeMaxZ);
@@ -149,17 +165,41 @@ public class Enemy : MonoBehaviour
                     );
             }
         }
-
-        yield return new WaitForSeconds(0.5f);
         patternCount++;
-        StartCoroutine(nameof(Pattern03MakeBullet));
         yield break;
     }
 
-    public void Hit()
+    public void Pattern04()
     {
-        print("Enemy Hit!");
+        patternCount = 0;
+        isPatternOn = true;
+        print("call pattern 03");
+        force = Vector3.right * Time.deltaTime * 0.5f;
+        LoopPattern04();
     }
+    public void LoopPattern04()
+    {
+        if (patternCount == 50)
+        {
+            isPatternOn = false;
+            return;
+        }
+        if (patternCount % 3 == 0)
+        {
+            force = Vector3.right * Time.deltaTime * 1f;
+            StartCoroutine(nameof(Pattern03MakeBullet));
+        }
+        else if (patternCount % 2 == 0)
+        {
+            force = Vector3.right * Time.deltaTime * 0.5f;
+            StartCoroutine(nameof(Pattern02MakeBullet));
+        }
+        else
+        {
+            force = Vector3.right * Time.deltaTime * 2f;
+            StartCoroutine(nameof(Pattern01MakeBullet));
+        }
 
-
+        Invoke(nameof(LoopPattern04), 0.5f);
+    }
 }
