@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
         level = 1;
         moveSpeed = 10f;
         bulletSpeed = 70f;
-        AttakDelay = 0.1f;
+        AttakDelay = 0.2f;
         isAttack = false;
         gameObject.transform.rotation = Quaternion.identity;
         mainCamera.transform.rotation = Quaternion.identity;

@@ -7,7 +7,7 @@ public class EnemyBullet : MonoBehaviour
     public float bulletSpeed;
     private void Start()
     {
-        bulletSpeed = 10f;
+        bulletSpeed = 30f;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -22,5 +22,6 @@ public class EnemyBullet : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * bulletSpeed);
+        // transform.Translate(new Vector3(Mathf.Sin(Time.time), Mathf.Cos(Time.time)) * .05f);
     }
 }
