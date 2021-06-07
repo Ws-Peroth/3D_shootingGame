@@ -1007,6 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468692b5421153f4db5dd8c7b2da911a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 328522059}
   isPatternOn: 0
   enemyBullet: {fileID: 5318929414393520463, guid: 51fac0980654607428b7adbbbfd2f05c,
     type: 3}

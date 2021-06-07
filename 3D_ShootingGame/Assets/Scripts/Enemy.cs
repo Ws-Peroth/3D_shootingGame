@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject player;
     public bool isPatternOn;
     public delegate void pattern();
     public List<pattern> patterns;
@@ -39,7 +40,8 @@ public class Enemy : MonoBehaviour
             // Pattern01,
             // Pattern02,
             // Pattern03,
-            Pattern04
+            // Pattern04
+            Pattern05
         };
     }
 
@@ -201,5 +203,61 @@ public class Enemy : MonoBehaviour
         }
 
         Invoke(nameof(LoopPattern04), 0.5f);
+    }
+
+    public void Pattern05()
+    {
+        patternCount = 0;
+        isPatternOn = true;
+        print("call pattern 05");
+        force = Vector3.right * Time.deltaTime * 0.5f;
+        LoopPattern05();
+    }
+    public void LoopPattern05()
+    {
+        if (patternCount == 50)
+        {
+            isPatternOn = false;
+            return;
+        }
+        StartCoroutine(nameof(Pattern05MakeBullet));
+        Invoke(nameof(LoopPattern05), 0.5f);
+    }
+
+    IEnumerator Pattern05MakeBullet()
+    {
+        for (int i = 25; i <= 182; i += 10)
+        {
+            BulletManager.bulletManager.InstantiateEnemyBullet(
+                
+                transform.localPosition,
+
+                Quaternion.Euler(
+                    GetRoZ(transform.localPosition, player.transform.localPosition),
+                    GetRoY(transform.localPosition, player.transform.localPosition),
+                    GetRoX(transform.localPosition, player.transform.localPosition)
+                )
+            );
+
+        }
+
+        patternCount++;
+        yield break;
+    }
+
+    private float GetRoX(Vector3 from, Vector3 to)
+    {
+        float angle = Mathf.Atan2(to.y = from.y, to.z - from.z) * 180 / Mathf.PI;
+        return angle < 0 ? angle + 360 : angle;
+    }
+    private float GetRoY(Vector3 from, Vector3 to)
+    {
+        float angle = Mathf.Atan2(to.z = from.z, to.x - from.x) * 180 / Mathf.PI;
+        return angle < 0 ? angle + 360 : angle;
+    }
+    private float GetRoZ(Vector3 from, Vector3 to)
+    {
+        float angle = Mathf.Atan2(to.y = from.y, to.x - from.x) * 180 / Mathf.PI;
+        return angle < 0 ? angle + 360 : angle;
     }
 }
