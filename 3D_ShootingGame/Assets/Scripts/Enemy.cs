@@ -37,11 +37,11 @@ public class Enemy : MonoBehaviour
         isPatternOn = false;
         patterns = new List<pattern>
         {
-            // Pattern01,
-            // Pattern02,
-            // Pattern03,
-            // Pattern04
-            Pattern05
+            Pattern01,
+            Pattern02,
+            Pattern03,
+            Pattern04
+            // Pattern05
         };
     }
 
